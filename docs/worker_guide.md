@@ -1,4 +1,4 @@
-# 작업자 가이드 & 지침서
+﻿# 작업자 가이드 & 지침서
 
 이 문서는 5명의 초기 작업자가 동일한 기준으로 작업을 진행하고,
 산출물 구조와 품질을 일관되게 유지하기 위한 공유용 가이드입니다.
@@ -19,7 +19,8 @@
   - 산출물: `docs/agent_mission.md`, `docs/guardrails.md`,
     `docs/style_guide.md`
   - 검수 포인트: 입력 범위 준수, 중립성, 현장 사용성
-- 작업자 2: Mode A (Framework Provider)
+- 작업자 2: Mode A (Framework Provider)
+  - 담당자: 신지영
   - 목표: 설계 가이드 템플릿의 실무 사용성 확보
   - 작업 내용: 입력 항목 보완, 출력 구성 개선, 샘플 작성
   - 산출물: `scenarios/mode_a/*`, `tests/mode_a_sample_*.md`
