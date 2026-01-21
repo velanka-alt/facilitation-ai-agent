@@ -1,6 +1,6 @@
 # 작업자 가이드 & 지침서
 
-이 문서는 4명의 초기 작업자가 동일한 기준으로 작업을 진행하고,
+이 문서는 5명의 초기 작업자가 동일한 기준으로 작업을 진행하고,
 산출물 구조와 품질을 일관되게 유지하기 위한 공유용 가이드입니다.
 
 ## 1) 프로젝트 목적 요약
@@ -12,16 +12,34 @@
 - `scenarios/`: 모드별 가이드 + 입력/출력 템플릿
 - `tests/`: 모드별 샘플 입력과 기대 출력
 
-## 3) 작업자 분담 (초기 4인 기준)
+## 3) 작업자 분담 (초기 5인 기준)
 - 작업자 1: 공통 기준 문서
-  - 대상: `docs/agent_mission.md`, `docs/guardrails.md`,
-    `docs/style_guide.md`, `docs/glossary.md`, `docs/phase_plan.md`
-- 작업자 2: Mode A
-  - 대상: `scenarios/mode_a/*`, `tests/mode_a_sample_*.md`
-- 작업자 3: Mode B
-  - 대상: `scenarios/mode_b/*`, `tests/mode_b_sample_*.md`
-- 작업자 4: Mode C
-  - 대상: `scenarios/mode_c/*`, `tests/mode_c_sample_*.md`
+  - 목표: 프로젝트의 기본 원칙과 작성 규칙을 명확히 유지
+  - 작업 내용: 미션/가드레일/스타일 가이드 문장 다듬기, 충돌 제거
+  - 산출물: `docs/agent_mission.md`, `docs/guardrails.md`,
+    `docs/style_guide.md`
+  - 검수 포인트: 입력 범위 준수, 중립성, 현장 사용성
+- 작업자 2: Mode A (Framework Provider)
+  - 목표: 설계 가이드 템플릿의 실무 사용성 확보
+  - 작업 내용: 입력 항목 보완, 출력 구성 개선, 샘플 작성
+  - 산출물: `scenarios/mode_a/*`, `tests/mode_a_sample_*.md`
+  - 검수 포인트: 템플릿 순서/헤딩 고정, A/B/C 옵션 제공, 샘플-템플릿 정합
+- 작업자 3: Mode B (Co-Facilitator)
+  - 목표: 현장 대응 멘트/옵션의 즉시성 강화
+  - 작업 내용: 제한 조건 반영, 개입 멘트/질문/옵션 개선, 샘플 작성
+  - 산출물: `scenarios/mode_b/*`, `tests/mode_b_sample_*.md`
+  - 검수 포인트: 시간/권력관계 반영, 리스크-대응 명확성
+- 작업자 4: Mode C (Workshop Recommender)
+  - 목표: 추천 리포트 구조와 설득력 확보
+  - 작업 내용: 추천 옵션/근거/아젠다/질문 정교화, 샘플 작성
+  - 산출물: `scenarios/mode_c/*`, `tests/mode_c_sample_*.md`
+  - 검수 포인트: 문제-추천 연결성, 질문 5개 준수, CTA 명확성
+- 작업자 5: 공통 운영 문서
+  - 목표: 문서 구조와 용어, 단계 계획의 일관성 유지
+  - 작업 내용: 용어 정의 정리, 폴더 구조/모드 개요/단계 계획 유지
+  - 산출물: `docs/glossary.md`, `docs/phase_plan.md`,
+    `docs/modes_overview.md`, `docs/folder_structure.md`
+  - 검수 포인트: 용어 중복/누락 방지, 모드 설명과 템플릿 일치
 
 ## 4) 공통 작성 규칙 (필수)
 - 입력 범위를 벗어나지 않는다. 필요하면 가정/확인 필요를 명시한다.
