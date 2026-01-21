@@ -26,6 +26,7 @@
   - 산출물: `scenarios/mode_a/*`, `tests/mode_a_sample_*.md`
   - 검수 포인트: 템플릿 순서/헤딩 고정, A/B/C 옵션 제공, 샘플-템플릿 정합
 - 작업자 3: Mode B (Co-Facilitator)
+  - 담당자: 이문형
   - 목표: 현장 대응 멘트/옵션의 즉시성 강화
   - 작업 내용: 제한 조건 반영, 개입 멘트/질문/옵션 개선, 샘플 작성
   - 산출물: `scenarios/mode_b/*`, `tests/mode_b_sample_*.md`
