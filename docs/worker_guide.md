@@ -1,0 +1,69 @@
+# 작업자 가이드 & 지침서
+
+이 문서는 4명의 초기 작업자가 동일한 기준으로 작업을 진행하고,
+산출물 구조와 품질을 일관되게 유지하기 위한 공유용 가이드입니다.
+
+## 1) 프로젝트 목적 요약
+- 퍼실리테이터가 워크숍을 설계/진행/추천할 때 바로 쓸 수 있는 문서형 AI 산출물을 만든다.
+- 모드 A/B/C별 입력/출력 템플릿과 운영 규칙을 정교화한다.
+
+## 2) 핵심 산출물
+- `docs/`: 미션, 가드레일, 용어, 스타일, 단계별 계획
+- `scenarios/`: 모드별 가이드 + 입력/출력 템플릿
+- `tests/`: 모드별 샘플 입력과 기대 출력
+
+## 3) 작업자 분담 (초기 4인 기준)
+- 작업자 1: 공통 기준 문서
+  - 대상: `docs/agent_mission.md`, `docs/guardrails.md`,
+    `docs/style_guide.md`, `docs/glossary.md`, `docs/phase_plan.md`
+- 작업자 2: Mode A
+  - 대상: `scenarios/mode_a/*`, `tests/mode_a_sample_*.md`
+- 작업자 3: Mode B
+  - 대상: `scenarios/mode_b/*`, `tests/mode_b_sample_*.md`
+- 작업자 4: Mode C
+  - 대상: `scenarios/mode_c/*`, `tests/mode_c_sample_*.md`
+
+## 4) 공통 작성 규칙 (필수)
+- 입력 범위를 벗어나지 않는다. 필요하면 가정/확인 필요를 명시한다.
+- 출력은 현장에서 바로 읽고 사용할 수 있는 문장으로 쓴다.
+- 템플릿의 순서/헤딩을 절대 변경하지 않는다.
+- A/B/C 선택지가 요구되면 반드시 3가지 옵션을 제공한다.
+- 개인 성향/의도 추정, 고위험 전문 자문(법률/의료/노무)은 금지한다.
+
+## 5) 작업 흐름 (권장)
+1. 작업 범위와 대상 파일을 확정한다.
+2. 브랜치를 생성한다. (예: `mode-a/input-template`)
+3. 템플릿/가이드 수정 → 샘플 업데이트 순으로 진행한다.
+4. 변경 내용 요약과 함께 PR을 생성한다.
+5. 리뷰 승인 후 병합한다.
+
+## 6) 브랜치/커밋 규칙
+- 브랜치 예시: `docs/guardrails-update`, `mode-b/intervention-template`
+- 커밋 메시지 예시:
+  - `docs: update guardrails wording`
+  - `mode-a: refine output template`
+  - `tests: add mode c sample`
+
+## 7) 템플릿 변경 시 체크리스트
+- 관련 `tests/` 샘플이 같이 업데이트 되었는가?
+- 새 용어가 있다면 `docs/glossary.md`에 추가했는가?
+- 모드 가이드(`scenarios/mode_*/README.md`)와 충돌이 없는가?
+- 가드레일/스타일 가이드와 충돌이 없는가?
+
+## 8) 충돌 방지 규칙
+- 공통 문서(`docs/guardrails.md`, `docs/style_guide.md`,
+  `docs/glossary.md`) 변경은 사전 합의 후 진행한다.
+- 템플릿 구조 변경은 해당 모드 작업자가 책임지고 샘플까지 업데이트한다.
+- 다른 모드 파일을 수정해야 할 경우 사전에 담당자에게 알린다.
+
+## 9) 산출물 품질 기준
+- 문장은 짧고 명확한 한국어로 작성한다.
+- 긴 문단 대신 목록/번호형을 사용한다.
+- 내용이 불명확하면 “확인 필요”를 명시한다.
+
+## 10) 공유용 빠른 링크
+- 프로젝트 개요: `README.md`
+- 작업 규칙: `CONTRIBUTING.md`
+- 가드레일: `docs/guardrails.md`
+- 스타일 가이드: `docs/style_guide.md`
+- 용어집: `docs/glossary.md`
