@@ -37,6 +37,7 @@
   - 산출물: `scenarios/mode_c/*`, `tests/mode_c_sample_*.md`
   - 검수 포인트: 문제-추천 연결성, 질문 5개 준수, CTA 명확성
 - 작업자 5: 공통 운영 문서
+  - 담당자: 채홍미
   - 목표: 문서 구조와 용어, 단계 계획의 일관성 유지
   - 작업 내용: 용어 정의 정리, 폴더 구조/모드 개요/단계 계획 유지
   - 산출물: `docs/glossary.md`, `docs/phase_plan.md`,
