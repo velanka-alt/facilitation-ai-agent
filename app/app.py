@@ -175,12 +175,9 @@ def score_tools(query: str) -> List[MatchResult]:
 @app.route("/", methods=["GET", "POST"])
 def index():
     form = {
-        "goal": "",
-        "deliverable": "",
-        "duration": "",
-        "format": "",
-        "audience": "",
-        "keywords": "",
+        "purpose": "",
+        "situation": "",
+        "participants": "",
     }
     results: List[MatchResult] = []
     submitted = False

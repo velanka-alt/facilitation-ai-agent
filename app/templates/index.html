@@ -18,28 +18,16 @@
         <h2>입력</h2>
         <form method="post" class="form">
           <label>
-            목적/주제
-            <input type="text" name="goal" value="{{ form.goal }}" placeholder="예: 팀 협업 개선, 문제 해결" />
+            목적
+            <input type="text" name="purpose" value="{{ form.purpose }}" placeholder="예: 팀 협업 개선, 문제 해결" />
           </label>
           <label>
-            산출물 타입
-            <input type="text" name="deliverable" value="{{ form.deliverable }}" placeholder="예: 아젠다, 결과보고" />
+            사용 상황
+            <input type="text" name="situation" value="{{ form.situation }}" placeholder="예: 아이디어가 막힐 때, 합의가 필요할 때" />
           </label>
           <label>
-            시간
-            <input type="text" name="duration" value="{{ form.duration }}" placeholder="예: 4H, 6H" />
-          </label>
-          <label>
-            운영 형태
-            <input type="text" name="format" value="{{ form.format }}" placeholder="예: 온라인, 오프라인" />
-          </label>
-          <label>
-            대상
-            <input type="text" name="audience" value="{{ form.audience }}" placeholder="예: 리더, 팀장, 전사" />
-          </label>
-          <label>
-            키워드
-            <textarea name="keywords" rows="4" placeholder="예: 아이디어 발산, 우선순위, 합의">{{ form.keywords }}</textarea>
+            인원수
+            <input type="text" name="participants" value="{{ form.participants }}" placeholder="예: 6명, 12명, 30명" />
           </label>
           <button type="submit">매칭하기</button>
         </form>
