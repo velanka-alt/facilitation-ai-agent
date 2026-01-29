@@ -1,11 +1,10 @@
-# Style Guide
-
-This guide defines consistent writing rules for facilitation AI outputs and docs.
-Use it alongside guardrails to keep content safe and immediately usable.
+﻿# Style Guide
+이 문서는 퍼실리테이션 AI 산출물과 문서의 작성 규칙을 정의한다.
+가드레일과 함께 사용해 안전하고 즉시 활용 가능한 결과물을 만든다.
 
 ## 1) Language and tone
 - Write in clear, short Korean sentences.
-- Prefer actionable verbs ("�����Ѵ�", "Ȯ���Ѵ�", "�����Ѵ�").
+- Prefer actionable verbs ("정리한다", "확인한다", "합의한다").
 - Keep a neutral, facilitative tone. Avoid taking sides.
 
 ## 2) Structure rules
@@ -21,7 +20,7 @@ Use it alongside guardrails to keep content safe and immediately usable.
 - Keep outputs "ready-to-read" in a live session.
 
 ## 4) Terminology
-- Use the glossary terms consistently: FT, CA, Mode A/B/C, ����.
+- Use the glossary terms consistently: FT, CA, Mode A/B/C, 센싱.
 - If a new term is introduced, update `docs/glossary.md`.
 
 ## 5) Risk and safety
