@@ -138,15 +138,162 @@ def load_reference_cards() -> Dict[str, ToolCard]:
 
 KEYWORDS_MAP = load_keywords()
 REFERENCE_CARDS = load_reference_cards()
+INTENT_BOOST = 2
+INTENT_RULES = [
+    {
+        "triggers": [
+            "아이스브레이크",
+            "아이스브레이커",
+            "라포",
+            "첫만남",
+            "체크인",
+            "분위기",
+            "친밀",
+            "소개",
+        ],
+        "tools": [
+            "명함만들기",
+            "진진가",
+            "이미지카드",
+            "제비뽑기 토크",
+            "릴레이 초상화",
+            "Life Line",
+            "Pie 한 조각",
+            "One less chair",
+            "Last Man Standing",
+        ],
+    },
+    {
+        "triggers": [
+            "아이디어",
+            "발산",
+            "브레인스토밍",
+            "아이디어도출",
+            "아이디어 도출",
+            "발상",
+            "창의",
+        ],
+        "tools": [
+            "Brain writing(브레인라이팅)",
+            "Random Word Brainstorming",
+            "Reverse Brainstorming",
+            "침묵의 마인드맵",
+            "NGT(Nominal Group Technique)",
+        ],
+    },
+    {
+        "triggers": [
+            "정리",
+            "구조화",
+            "정렬",
+            "분류",
+            "체계화",
+            "클러스터",
+            "묶기",
+        ],
+        "tools": [
+            "Cluster",
+            "Grid",
+            "Diagram",
+            "List",
+            "Illustration",
+            "Gallery walk",
+        ],
+    },
+    {
+        "triggers": [
+            "의사결정",
+            "결정",
+            "합의",
+            "우선순위",
+            "투표",
+            "선택",
+            "평가",
+        ],
+        "tools": [
+            "우선순위화",
+            "Payoff Matrix(Pay off matrix)",
+            "Multi Voting",
+            "Fist to five",
+            "Minority Review",
+            "Point Sharing Method",
+            "Top Consensus Workshop Method",
+        ],
+    },
+    {
+        "triggers": [
+            "회고",
+            "피드백",
+            "마무리",
+            "클로징",
+            "소감",
+            "리뷰",
+        ],
+        "tools": [
+            "3F",
+            "PMI(Plus/Minus/Interesting)",
+            "MDFP",
+            "Exit Survey",
+        ],
+    },
+    {
+        "triggers": [
+            "갈등",
+            "복합",
+            "이슈",
+            "복잡",
+            "조정",
+        ],
+        "tools": [
+            "Dynamic Facilitation",
+            "MDFP",
+        ],
+    },
+    {
+        "triggers": [
+            "목적",
+            "범위",
+            "스코프",
+            "정의",
+            "요구사항",
+            "니즈",
+            "진단",
+        ],
+        "tools": [
+            "Sensing(센싱)",
+            "3P Define(목적/산출물/참여자)",
+            "In&Out Frame(Scope In/Out)",
+        ],
+    },
+]
 
 
 def normalize_text(value: str) -> str:
     return " ".join(value.strip().lower().split())
 
 
+def apply_intent_rules(query_normalized: str) -> Tuple[Dict[str, int], Dict[str, List[str]]]:
+    boosts: Dict[str, int] = {}
+    matched: Dict[str, List[str]] = {}
+
+    for rule in INTENT_RULES:
+        hits = [t for t in rule["triggers"] if t in query_normalized]
+        if not hits:
+            continue
+        for tool in rule["tools"]:
+            if tool not in KEYWORDS_MAP:
+                continue
+            boosts[tool] = boosts.get(tool, 0) + INTENT_BOOST
+            matched.setdefault(tool, [])
+            matched[tool].extend(hits)
+
+    return boosts, matched
+
+
 def score_tools(query: str) -> List[MatchResult]:
     results: List[MatchResult] = []
     query_normalized = normalize_text(query)
+    intent_boosts, intent_hits = apply_intent_rules(query_normalized)
 
     for tool_name, keywords in KEYWORDS_MAP.items():
         score = 0
@@ -158,6 +305,9 @@ def score_tools(query: str) -> List[MatchResult]:
             if kw_norm in query_normalized:
                 score += 1
                 matched.append(kw)
+        if tool_name in intent_boosts:
+            score += intent_boosts[tool_name]
+            matched.extend(intent_hits.get(tool_name, []))
         card = REFERENCE_CARDS.get(tool_name)
         results.append(
             MatchResult(
