@@ -31,6 +31,7 @@ class MatchResult:
     name: str
     score: int
     matched_keywords: List[str]
+    reason: str
     card: ToolCard | None
 
 
@@ -267,9 +268,52 @@ INTENT_RULES = [
     },
 ]
 
+SIZE_BOOST = 2
+SIZE_RULES = [
+    {
+        "min": 30,
+        "label": "대규모 인원 기준",
+        "tools": [
+            "Gallery walk",
+            "Multi Voting",
+            "NGT(Nominal Group Technique)",
+        ],
+    },
+    {
+        "min": 12,
+        "label": "중간 규모 기준",
+        "tools": [
+            "Brain writing(브레인라이팅)",
+            "Cluster",
+            "Fist to five",
+        ],
+    },
+    {
+        "min": 0,
+        "label": "소규모 기준",
+        "tools": [
+            "List",
+            "3F",
+            "Brain writing(브레인라이팅)",
+        ],
+    },
+]
+
 
 def normalize_text(value: str) -> str:
     return " ".join(value.strip().lower().split())
+
+
+def extract_participant_count(raw: str) -> int | None:
+    if not raw:
+        return None
+    match = re.search(r"(\\d+)", raw)
+    if not match:
+        return None
+    try:
+        return int(match.group(1))
+    except ValueError:
+        return None
 
 
 def apply_intent_rules(query_normalized: str) -> Tuple[Dict[str, int], Dict[str, List[str]]]:
@@ -290,10 +334,40 @@ def apply_intent_rules(query_normalized: str) -> Tuple[Dict[str, int], Dict[str,
     return boosts, matched
 
 
-def score_tools(query: str) -> List[MatchResult]:
+def apply_size_rules(count: int | None) -> Tuple[Dict[str, int], Dict[str, str]]:
+    if count is None:
+        return {}, {}
+    boosts: Dict[str, int] = {}
+    labels: Dict[str, str] = {}
+    for rule in SIZE_RULES:
+        if count >= rule["min"]:
+            for tool in rule["tools"]:
+                if tool not in KEYWORDS_MAP:
+                    continue
+                boosts[tool] = boosts.get(tool, 0) + SIZE_BOOST
+                labels[tool] = rule["label"]
+            break
+    return boosts, labels
+
+
+def build_reason(matched_keywords: List[str], size_label: str | None, fallback: bool = False) -> str:
+    if fallback:
+        return "키워드 매칭이 없어 기본 추천으로 표시했습니다."
+    parts: List[str] = []
+    if matched_keywords:
+        preview = ", ".join(matched_keywords[:2])
+        parts.append(f"키워드 매칭({preview})")
+    if size_label:
+        parts.append(size_label)
+    return " / ".join(parts) if parts else "입력 정보 기반 추천"
+
+
+def score_tools(query: str, participants: str) -> List[MatchResult]:
     results: List[MatchResult] = []
     query_normalized = normalize_text(query)
     intent_boosts, intent_hits = apply_intent_rules(query_normalized)
+    participant_count = extract_participant_count(participants)
+    size_boosts, size_labels = apply_size_rules(participant_count)
 
     for tool_name, keywords in KEYWORDS_MAP.items():
         score = 0
@@ -308,17 +382,45 @@ def score_tools(query: str) -> List[MatchResult]:
         if tool_name in intent_boosts:
             score += intent_boosts[tool_name]
             matched.extend(intent_hits.get(tool_name, []))
+        if tool_name in size_boosts:
+            score += size_boosts[tool_name]
         card = REFERENCE_CARDS.get(tool_name)
+        reason = build_reason(sorted(set(matched)), size_labels.get(tool_name))
         results.append(
             MatchResult(
                 name=tool_name,
                 score=score,
                 matched_keywords=sorted(set(matched)),
+                reason=reason,
                 card=card,
             )
         )
 
     results.sort(key=lambda r: (-r.score, r.name))
+    return results
+
+
+def fallback_results(participants: str) -> List[MatchResult]:
+    participant_count = extract_participant_count(participants)
+    if participant_count is not None and participant_count >= 30:
+        tools = ["Gallery walk", "Multi Voting", "NGT(Nominal Group Technique)"]
+    elif participant_count is not None and participant_count >= 12:
+        tools = ["Brain writing(브레인라이팅)", "Cluster", "Fist to five"]
+    else:
+        tools = ["List", "3F", "Brain writing(브레인라이팅)"]
+
+    results: List[MatchResult] = []
+    for tool in tools:
+        card = REFERENCE_CARDS.get(tool)
+        results.append(
+            MatchResult(
+                name=tool,
+                score=1,
+                matched_keywords=[],
+                reason=build_reason([], None, fallback=True),
+                card=card,
+            )
+        )
     return results
 
 
@@ -331,20 +433,25 @@ def index():
     }
     results: List[MatchResult] = []
     submitted = False
+    fallback_notice = False
 
     if request.method == "POST":
         submitted = True
         for key in form:
             form[key] = request.form.get(key, "").strip()
         query = "\n".join([form[k] for k in form if form[k]])
-        results = score_tools(query)
+        results = score_tools(query, form["participants"])
         results = [r for r in results if r.score > 0]
+        if submitted and not results:
+            fallback_notice = True
+            results = fallback_results(form["participants"])
 
     return render_template(
         "index.html",
         form=form,
         results=results,
         submitted=submitted,
+        fallback_notice=fallback_notice,
         total_tools=len(KEYWORDS_MAP),
     )
 

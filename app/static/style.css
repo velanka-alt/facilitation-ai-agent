@@ -115,6 +115,12 @@ body {
   font-weight: 600;
 }
 
+.reason {
+  margin: 8px 0 12px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
 .matched {
   margin: 8px 0 12px;
   font-size: 12px;
@@ -137,6 +143,16 @@ body {
   border-radius: 8px;
   color: var(--muted);
   background: #faf8f3;
+}
+
+.notice {
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: #f1f6ff;
+  color: #2f4a7a;
+  font-size: 13px;
+  margin-bottom: 12px;
+  border: 1px solid #d6e2f7;
 }
 
 @media (max-width: 900px) {
