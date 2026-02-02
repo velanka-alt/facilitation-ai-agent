@@ -19,6 +19,7 @@
 - `docs/style_guide.md`: 표준 권고 문구와 적용 조건 명시
 - `docs/PR_GUIDE.md`: PR 생성 가이드 추가
 - `.github/PULL_REQUEST_TEMPLATE.md`: PR 템플릿 확장(범위/의존성/검증 항목 명시)
+- `docs/escalation_guide.md`: AI/컨설팅 경계 가이드 추가
 
 ---
 
@@ -27,7 +28,7 @@
 - `tool-keywords-tuning`: 키워드 변형 보강 (base: `w1/tool-frame-docs`)
 - `mode-c/refine-template`: Mode C 템플릿 확장 + 샘플 업데이트
 - `mvp/web-app`: Flask 기반 MVP 웹 앱 추가
-- `mvp-usability-tuning`: MVP 추천 로직 개선 + 컨설팅 권고 규칙/Mode A 업데이트 + PR 가이드/템플릿
+- `mvp-usability-tuning`: MVP 추천 로직 개선 + 컨설팅 권고 규칙/Mode A 업데이트 + PR 가이드/템플릿 + 경계 가이드
 - `mvp-usability-mode-check`: Mode B 샘플 정리
 - `docs/facilitation-qna`: 100 Q&A 문서화
 - `docs/context-log`: 컨텍스트 로그 추가 (필요 시 반영)
@@ -66,6 +67,9 @@
 ### PR 운영 가이드
 - `docs/PR_GUIDE.md`: PR 생성 가이드 추가
 - `.github/PULL_REQUEST_TEMPLATE.md`: PR 템플릿 확장
+
+### 경계 가이드
+- `docs/escalation_guide.md`: AI/컨설팅 경계 가이드 추가
 
 ---
 
