@@ -1,13 +1,29 @@
-# Pull Request Template
+# Pull Request
 
 ## Summary
 - What changed:
 - Why:
-- Related issue:
+
+## Scope
+- Affected modes/docs:
+- User impact:
+
+## Dependencies
+- Base branch/PR:
+- Blocks / blocked by:
+
+## Evidence
+- Examples or screenshots (if output changes):
+
+## Tests
+- Manual checks:
+  - [ ] Templates aligned
+  - [ ] Guardrails respected
+  - [ ] Samples/tests updated (if needed)
+  - [ ] Glossary updated (if needed)
+- Notes:
 
 ## Checklist
-- [ ] Guardrails respected
-- [ ] Templates aligned
-- [ ] Glossary updated (if needed)
-- [ ] Samples/tests updated (if needed)
-
+- [ ] Template order/heading unchanged
+- [ ] A/B/C options provided when required
+- [ ] Context log updated if project state changed
