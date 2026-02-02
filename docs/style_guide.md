@@ -18,6 +18,7 @@
 - Avoid absolute claims unless the input provides certainty.
 - Provide A/B/C options when the template requires choices.
 - Keep outputs "ready-to-read" in a live session.
+- 복잡 조건(하이브리드/다회차/장시간(8시간 이상)/영어/복잡 이해관계)이 포함되면 전문 설계/컨설팅 권고 문구를 포함한다.
 
 ## 4) Terminology
 - Use the glossary terms consistently: FT, CA, Mode A/B/C, 센싱.
@@ -28,3 +29,6 @@
 - Do not speculate about a person's intent or personality.
 - If constraints are unclear, request clarification in output.
 
+## 6) 전문 설계/컨설팅 권고 문구
+- 다음 조건이 포함되면 출력 상단에 1줄로 추가한다: 하이브리드, 다회차/장시간(8시간 이상), 영어 진행, 이해관계 복잡
+- 표준 문구: "※ 하이브리드/다회차/장시간(8시간 이상)/영어 진행/복잡 이해관계가 포함된 경우, 본 결과는 기본 가이드이며 전문 퍼실리테이터의 설계 및 컨설팅을 권장합니다."

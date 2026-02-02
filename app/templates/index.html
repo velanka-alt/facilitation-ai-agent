@@ -36,6 +36,9 @@
 
       <section class="panel">
         <h2>결과</h2>
+        {% if fallback_notice %}
+          <div class="notice">키워드 매칭이 없어 기본 추천을 표시했습니다. 입력을 구체화하면 정확도가 올라갑니다.</div>
+        {% endif %}
         {% if submitted and not results %}
           <div class="empty">일치하는 키워드가 없습니다. 입력을 더 구체화해 주세요.</div>
         {% endif %}
@@ -46,6 +49,9 @@
               <h3>{{ result.name }}</h3>
               <span class="score">점수 {{ result.score }}</span>
             </div>
+            {% if result.reason %}
+              <div class="reason">추천 이유: {{ result.reason }}</div>
+            {% endif %}
             {% if result.matched_keywords %}
               <div class="matched">매칭 키워드: {{ result.matched_keywords | join(', ') }}</div>
             {% endif %}

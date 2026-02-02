@@ -1,12 +1,13 @@
 # Mode C Input Template
 
 필수 입력
-- Problem:
-- Outcome:
-- Audience:
-- Time:
+- 문제상황:
+- 원하는 변화:
+- 대상(인원/레벨):
+- 시간:
 
 선택 입력
-- Budget:
-- Past Experience:
-- Sensitive Issues:
+- 예산:
+- 과거 경험:
+- 민감 이슈:
+- 복잡 조건 여부(하이브리드/다회차/장시간(8시간 이상)/영어/이해관계 복잡):
